@@ -22,19 +22,28 @@ describe Customer do
     end
   end
 
-  describe ".list_money" do
+  describe "#list_money" do
     it "should return the amount of money in the wallet" do
       customer = Customer.new
       expect(customer.list_money).to eq 10.00
     end
   end
   
-  describe ".pay" do
+  describe "#pay" do
     it "should decrement the wallet by the amount of the product" do
       products = Product.create_all
       customer = Customer.new
       customer.pay(products["ABC"])
       expect(customer.wallet).to eq 8.75
+    end
+  end
+  
+  describe "#refund" do 
+    it "should remove from the wallet the amount of the specified product" do
+      products = Product.create_all
+      customer = Customer.new
+      customer.refund(products["ABC"])
+      expect(customer.wallet).to eq 11.25
     end
   end
 end
